@@ -25,7 +25,7 @@
 - https://t.me/audioryukimods
 
 ## Donate
-https://www.paypal.me/reiryuki
+- https://www.paypal.me/reiryuki
 
 ## Download
 - Tap "Releases" bellow
