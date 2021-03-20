@@ -21,7 +21,8 @@
 ## Report Guide
 - https://t.me/audioryukimods/2618
 
-## Donate
+## Thanks for Donations
+- https://t.me/audioryukimods/2619
 - https://www.paypal.me/reiryuki
 
 ## Download
