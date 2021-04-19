@@ -6,7 +6,7 @@
 
 ## Requirements
 - arm64 architecture
-- Android 11 (Added support for Android 10 and 9 by using different older legacy apps version from G 5G Plus but not recommended)
+- Android 11 (Added support for Android 10 and 9 by using different older legacy apps version from G 5G Plus)
 
 ## Installation Guide
 - Install the module via Magisk Manager only
