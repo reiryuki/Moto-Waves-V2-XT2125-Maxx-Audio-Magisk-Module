@@ -2,6 +2,7 @@
 
 ## Descriptions
 - An equalizer ported from Motorola Moto XT2125-4 (nio)
+- Global type soundfx
 - [Screenshots](https://t.me/audioryukimods/2963)
 
 ## Requirements
