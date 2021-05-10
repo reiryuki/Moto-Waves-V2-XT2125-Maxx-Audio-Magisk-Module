@@ -12,7 +12,7 @@
 
 ## Installation Guide
 - Install the module via Magisk Manager only
-- Read Troubleshootings section if using audio mods other than this
+- Install Audio Modification Library at Magisk download if using audio mods other than this
 - Reboot
 
 ## Troubleshootings
