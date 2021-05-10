@@ -1,4 +1,4 @@
-# Moto Waves XT2125-4 Maxx Audio Magisk Module
+# Moto Waves V2 XT2125-4 Maxx Audio Magisk Module
 
 ## Descriptions
 - An equalizer ported from Motorola Moto XT2125-4 (nio)
@@ -6,8 +6,9 @@
 - [Screenshots](https://t.me/audioryukimods/2963)
 
 ## Requirements
-- arm64 architecture
+- arm64 or arm architecture
 - Android 11
+- Magisk installed
 
 ## Installation Guide
 - Install the module via Magisk Manager only
