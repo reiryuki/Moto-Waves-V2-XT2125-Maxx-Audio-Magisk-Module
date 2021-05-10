@@ -11,7 +11,7 @@
 - Magisk installed
 
 ## Installation Guide
-- Install the module via Magisk Manager only
+- Install the module via Magisk app or recovery
 - Install Audio Modification Library at Magisk download if using audio mods other than this
 - Reboot
 
