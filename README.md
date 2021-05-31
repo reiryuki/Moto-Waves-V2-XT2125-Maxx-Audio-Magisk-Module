@@ -26,4 +26,4 @@
 - https://www.paypal.me/reiryuki
 
 ## Download
-- Tap "Releases" bellow
+- Moved link here: https://www.pling.com/p/1531780/
