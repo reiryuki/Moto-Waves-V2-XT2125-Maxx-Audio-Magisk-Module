@@ -9,13 +9,16 @@
 
 ## Requirements
 - arm64 or arm architecture
-- Android 11 (not all ROM is supported)
+- Android 11 & 12 (not all ROM is supported)
 - Magisk installed
 
 ## Installation Guide
 - Install the module via Magisk app or recovery
 - Install Audio Modification Library at Magisk download if using audio mods other than this
 - Reboot
+
+## Tested on
+- Android 12 AncientOS ROM
 
 ## Troubleshootings
 - https://t.me/androidryukimodsdiscussions/3081
