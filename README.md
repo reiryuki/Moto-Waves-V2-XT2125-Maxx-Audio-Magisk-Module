@@ -19,6 +19,7 @@
 
 ## Tested on
 - Android 12 AncientOS ROM
+  - Bug: Doesn't work at bluetooth audio
 
 ## Troubleshootings
 - https://t.me/androidryukimodsdiscussions/3081
