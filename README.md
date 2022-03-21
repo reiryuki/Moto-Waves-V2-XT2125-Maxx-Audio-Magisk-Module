@@ -14,12 +14,12 @@
 
 ## Installation Guide
 - Install the module via Magisk app or recovery
-- Install Audio Modification Library at Magisk download if using audio mods other than this
+- Install AML Magisk module only if using any other audio mods
 - Reboot
 
 ## Tested on
 - Android 12 AncientOS ROM
-  - Bug: Doesn't work at bluetooth audio
+  - Bug: Doesn't work with bluetooth audio
 
 ## Troubleshootings
 - https://t.me/androidryukimodsdiscussions/3081
