@@ -9,7 +9,8 @@
 
 ## Requirements
 - arm64 or arm architecture
-- Android 11 & 12 (not all ROM is supported)
+- Android 11 (SDK 30) & 12 (SDK 31)
+  (not all ROM is supported)
 - Magisk installed
 
 ## Installation Guide
