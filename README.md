@@ -21,7 +21,9 @@
 - Android 12 AncientOS ROM
   - Bug: Doesn't work with bluetooth audio
 
-## Troubleshootings
+## Optionals & Troubleshootings
+- https://t.me/androidryukimodsdiscussions/60861
+- https://t.me/androidryukimodsdiscussions/29836
 - https://t.me/androidryukimodsdiscussions/3081
 
 ## Bug Report
