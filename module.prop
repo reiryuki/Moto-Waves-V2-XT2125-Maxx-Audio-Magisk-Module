@@ -1,6 +1,6 @@
 id=MotoWaves
 name=Moto Waves V2 XT2125-4
-version=v4.1
+version=v4.1-R
 versionCode=31
 author=Rei Ryuki the Fixer
 description=An equalizer ported from Motorola XT2125-4 for any Android 11 and 12, architecture arm64 & arm.

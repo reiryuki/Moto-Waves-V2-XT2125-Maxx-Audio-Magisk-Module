@@ -119,16 +119,16 @@ fi
 
 # function
 extract_lib() {
-  for APPS in $APP; do
-    ui_print "- Extracting $APPS.apk libs..."
-    FILE=`find $MODPATH/system -type f -name $APPS.apk`
-    DIR=`find $MODPATH/system -type d -name $APPS`/lib/$ARCH
-    mkdir -p $DIR
-    rm -rf $TMPDIR/*
-    unzip -d $TMPDIR -o $FILE $DES
-    cp -f $TMPDIR/$DES $DIR
-    ui_print " "
-  done
+for APPS in $APP; do
+  ui_print "- Extracting $APPS.apk libs..."
+  FILE=`find $MODPATH/system -type f -name $APPS.apk`
+  DIR=`find $MODPATH/system -type d -name $APPS`/lib/$ARCH
+  mkdir -p $DIR
+  rm -rf $TMPDIR/*
+  unzip -d $TMPDIR -o $FILE $DES
+  cp -f $TMPDIR/$DES $DIR
+  ui_print " "
+done
 }
 
 # extract
@@ -333,13 +333,17 @@ if [ "$BOOTMODE" == true ]; then
 fi
 }
 detect_soundfx() {
-if [ "$BOOTMODE" == true ]; then
-  if dumpsys media.audio_flinger | grep -Eq $UUID; then
-    ui_print "- $NAME is detected"
-    ui_print "  It may conflicting with this module"
-    ui_print "  Read Github Troubleshootings to disable it"
-    ui_print " "
-  fi
+if [ "$BOOTMODE" == true ]\
+&& dumpsys media.audio_flinger | grep -Eq $UUID; then
+  ui_print "- $NAME is detected."
+  ui_print "  It may be conflicting with this module."
+  ui_print "  You can run terminal:"
+  ui_print " "
+  ui_print "  su"
+  ui_print "  setprop disable.dirac 1"
+  ui_print " "
+  ui_print "  and reinstall this module if you want to disable it."
+  ui_print " "
 fi
 }
 
@@ -366,13 +370,14 @@ if getprop | grep -Eq "disable.dirac\]: \[1"; then
   done
 fi
 
-# dirac
+# dirac & misoundfx
 FILE=$MODPATH/.aml.sh
 APP="XiaomiParts
      ZenfoneParts
      ZenParts
      GalaxyParts
-     KharaMeParts"
+     KharaMeParts
+     DeviceParts"
 NAME='dirac soundfx'
 UUID=e069d9e0-8329-11df-9168-0002a5d5c51b
 if getprop | grep -Eq "disable.dirac\]: \[1"; then
@@ -383,8 +388,6 @@ if getprop | grep -Eq "disable.dirac\]: \[1"; then
 else
   detect_soundfx
 fi
-
-# misoundfx
 FILE=$MODPATH/.aml.sh
 NAME=misoundfx
 UUID=5b8e36a5-144a-4c38-b1d7-0002a5d5c51b
@@ -394,7 +397,18 @@ if getprop | grep -Eq "disable.misoundfx\]: \[1"; then
   check_app
   ui_print " "
 else
-  detect_soundfx
+  if [ "$BOOTMODE" == true ]\
+  && dumpsys media.audio_flinger | grep -Eq $UUID; then
+    ui_print "- $NAME is detected."
+    ui_print "  It may be conflicting with this module."
+    ui_print "  You can run terminal:"
+    ui_print " "
+    ui_print "  su"
+    ui_print "  setprop disable.misoundfx 1"
+    ui_print " "
+    ui_print "  and reinstall this module if you want to disable it."
+    ui_print " "
+  fi
 fi
 
 # dirac_controller

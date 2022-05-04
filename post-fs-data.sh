@@ -1,6 +1,3 @@
-(
-
-mount /data
 mount -o rw,remount /data
 MODPATH=${0%/*}
 MOD=/data/adb/modules
@@ -8,8 +5,6 @@ AML=$MOD/aml
 ACDB=$MOD/acdb
 
 # debug
-magiskpolicy --live "dontaudit system_server system_file file write"
-magiskpolicy --live "allow     system_server system_file file write"
 exec 2>$MODPATH/debug-pfsd.log
 set -x
 
@@ -25,9 +20,9 @@ if [ -d /sbin/.magisk ]; then
 else
   MAGISKTMP=`find /dev -mindepth 2 -maxdepth 2 -type d -name .magisk`
 fi
-ETC="/my_product/etc $MAGISKTMP/mirror/system/etc"
+ETC=$MAGISKTMP/mirror/system/etc
 VETC=$MAGISKTMP/mirror/system/vendor/etc
-VOETC="/odm/etc $MAGISKTMP/mirror/system/vendor/odm/etc"
+VOETC=$MAGISKTMP/mirror/system/vendor/odm/etc
 MODETC=$MODPATH/system/etc
 MODVETC=$MODPATH/system/vendor/etc
 MODVOETC=$MODPATH/system/vendor/odm/etc
@@ -61,7 +56,7 @@ NAME="*audio*effects*.conf -o -name *audio*effects*.xml -o -name *policy*.conf -
 rm -f `find $MODPATH/system -type f -name $NAME`
 A=`find $ETC -maxdepth 1 -type f -name $NAME`
 VA=`find $VETC -maxdepth 1 -type f -name $NAME`
-VOA=`find $OETC -maxdepth 1 -type f -name $NAME`
+VOA=`find $VOETC -maxdepth 1 -type f -name $NAME`
 VAA=`find $VETC/audio -maxdepth 1 -type f -name $NAME`
 VBA=`find $VETC/audio/"$PROP" -maxdepth 1 -type f -name $NAME`
 if [ "$A" ]; then
@@ -71,10 +66,10 @@ if [ "$VA" ]; then
   cp -f $VA $MODVETC
 fi
 if [ "$VOA" ]; then
-  cp -f $VOA $MODOETC
+  cp -f $VOA $MODVOETC
 fi
 if [ "$VAA" ]; then
-  cp -f $VAA $MODOETC/audio
+  cp -f $VAA $MODVOETC/audio
 fi
 if [ "$VBA" ]; then
   cp -f $VBA $MODVETC/audio/"$PROP"
@@ -87,20 +82,6 @@ if [ "$SKU" ]; then
     fi
   done
 fi
-
-# aml fix
-DIR=$AML/system/vendor/odm/etc
-if [ "$VOA" ] && [ -d $AML ] && [ ! -f $AML/disable ] && [ ! -d $DIR ]; then
-  mkdir -p $DIR
-  cp -f $VOA $DIR
-fi
-magiskpolicy --live "dontaudit vendor_configs_file labeledfs filesystem associate"
-magiskpolicy --live "allow     vendor_configs_file labeledfs filesystem associate"
-magiskpolicy --live "dontaudit init vendor_configs_file dir relabelfrom"
-magiskpolicy --live "allow     init vendor_configs_file dir relabelfrom"
-magiskpolicy --live "dontaudit init vendor_configs_file file relabelfrom"
-magiskpolicy --live "allow     init vendor_configs_file file relabelfrom"
-chcon -R u:object_r:vendor_configs_file:s0 $DIR
 
 # run
 sh $MODPATH/.aml.sh
@@ -118,7 +99,5 @@ if [ -f $FILE ]; then
   sh $FILE
   rm -f $FILE
 fi
-
-) 2>/dev/null
 
 
