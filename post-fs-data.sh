@@ -82,6 +82,7 @@ if [ "$SKU" ]; then
     fi
   done
 fi
+rm -f `find $MODPATH/system -type f -name *policy*volumes*.xml`
 
 # run
 sh $MODPATH/.aml.sh

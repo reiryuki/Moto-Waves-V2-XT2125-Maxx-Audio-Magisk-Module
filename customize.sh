@@ -37,7 +37,7 @@ NUM=30
 if [ "$API" -lt $NUM ]; then
   ui_print "! Unsupported SDK $API. You have to upgrade your"
   ui_print "  Android version at least SDK API $NUM to use this"
-  ui_print "  module."
+  ui_print "  module. Otherwise, use Moto Waves G 5G Plus instead!"
   abort
 else
   ui_print "- SDK $API"
@@ -120,7 +120,7 @@ fi
 # function
 extract_lib() {
 for APPS in $APP; do
-  ui_print "- Extracting $APPS.apk libs..."
+  ui_print "- Extracting..."
   FILE=`find $MODPATH/system -type f -name $APPS.apk`
   DIR=`find $MODPATH/system -type d -name $APPS`/lib/$ARCH
   mkdir -p $DIR
@@ -157,7 +157,6 @@ fi
 for APPS in $APP; do
   rm -f `find /data/dalvik-cache /data/resource-cache -type f -name *$APPS*.apk`
 done
-rm -f $MODPATH/LICENSE
 rm -rf /metadata/magisk/$MODID
 rm -rf /mnt/vendor/persist/magisk/$MODID
 rm -rf /persist/magisk/$MODID
@@ -364,7 +363,7 @@ if getprop | grep -Eq "disable.dirac\]: \[1" || getprop | grep -Eq "disable.miso
   done
 fi
 if getprop | grep -Eq "disable.dirac\]: \[1"; then
-  APP=DiracAudioControlService
+  APP="Dirac DiracAudioControlService"
   for APPS in $APP; do
     hide_app
   done
@@ -480,9 +479,8 @@ if echo "$PROP" | grep -Eq n; then
 fi
 
 # audio rotation
-PROP=`getprop audio.rotation`
 FILE=$MODPATH/service.sh
-if [ "$PROP" == 1 ]; then
+if getprop | grep -Eq "audio.rotation\]: \[1"; then
   ui_print "- Activating ro.audio.monitorRotation=true"
   sed -i '1i\
 resetprop ro.audio.monitorRotation true' $FILE
@@ -490,13 +488,20 @@ resetprop ro.audio.monitorRotation true' $FILE
 fi
 
 # raw
-PROP=`getprop disable.raw`
 FILE=$MODPATH/.aml.sh
-if [ "$PROP" == 0 ]; then
+if getprop | grep -Eq "disable.raw\]: \[0"; then
   ui_print "- Not disabling Ultra Low Latency playback (RAW)"
   ui_print " "
 else
   sed -i 's/#u//g' $FILE
+fi
+
+# other
+FILE=$MODPATH/service.sh
+if getprop | grep -Eq "other.etc\]: \[1"; then
+  ui_print "- Activating other etc files bind mount..."
+  sed -i 's/#p//g' $FILE
+  ui_print " "
 fi
 
 # permission
