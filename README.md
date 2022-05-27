@@ -3,6 +3,7 @@
 ## Descriptions
 - An equalizer ported from Motorola Moto XT2125-4 (nio)
 - Global type soundfx
+- Sources: https://github.com/reiryuki/Moto-Waves-V2-XT2125-4-Maxx-Audio-Magisk-Module/blob/main/module.prop
 
 ## Screenshots
 - https://t.me/androidryukimodsdiscussions/2963
