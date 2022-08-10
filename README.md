@@ -16,7 +16,7 @@
 
 ## Installation Guide
 - Install the module via Magisk app or recovery
-- Install AML Magisk module only if using any other audio mods
+- Install AML Magisk module only if using any other audio mods https://zackptg5.com/android.php#aml
 - Reboot
 
 ## Tested on
