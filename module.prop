@@ -1,13 +1,8 @@
 id=MotoWaves
 name=Moto Waves V2 XT2125-4
-version=v4.3.beta.1
+version=v4.3
 versionCode=33
 author=Rei Ryuki the Fixer
 description=An equalizer global type soundfx ported from Motorola XT2125-4 for any Android 11 and 12, architecture arm64 & arm.
-# Source: https://dumps.tadiphone.dev/dumps/motorola/nio msi_prc-user-11-RRN31.Q3-1-11-1-919e2-release-keys
-# Android 12 source: https://dumps.tadiphone.dev/dumps/motorola/xpeng user-12-S1RX32.50-13-ffb1b-release-keys
-# pstar source: https://dumps.tadiphone.dev/dumps/motorola/pstar msi-user-11-RRAS31.Q3-19-86-4-01582-release-keys
-# nairo source: https://dumps.tadiphone.dev/dumps/motorola/nairo msi-user-11-RPN31.Q4U-39-27-5-20ead-release-keys
-# racer source: https://dumps.tadiphone.dev/dumps/motorola/racer msi-user-11-RPD31.Q4U-39-26-4-3c874-release-keys
 
 
