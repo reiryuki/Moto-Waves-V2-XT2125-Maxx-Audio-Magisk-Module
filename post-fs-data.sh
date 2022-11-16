@@ -11,7 +11,7 @@ set -x
 # run
 FILE=$MODPATH/sepolicy.sh
 if [ -f $FILE ]; then
-  sh $FILE
+  . $FILE
 fi
 
 # context
@@ -21,15 +21,20 @@ chcon -R u:object_r:vendor_configs_file:s0 $MODPATH/system/vendor/etc
 chcon -R u:object_r:vendor_configs_file:s0 $MODPATH/system/vendor/odm/etc
 chcon u:object_r:same_process_hal_file:s0 $MODPATH/system/vendor/lib*/libadspd.so
 
-# etc
+# magisk
 if [ -d /sbin/.magisk ]; then
   MAGISKTMP=/sbin/.magisk
 else
-  MAGISKTMP=`find /dev -mindepth 2 -maxdepth 2 -type d -name .magisk`
+  MAGISKTMP=`realpath /dev/*/.magisk`
 fi
-ETC=$MAGISKTMP/mirror/system/etc
-VETC=$MAGISKTMP/mirror/system/vendor/etc
-VOETC=$MAGISKTMP/mirror/system/vendor/odm/etc
+
+# path
+MIRROR=$MAGISKTMP/mirror
+SYSTEM=`realpath $MIRROR/system`
+VENDOR=`realpath $MIRROR/vendor`
+ETC=$SYSTEM/etc
+VETC=$VENDOR/etc
+VOETC=$VENDOR/odm/etc
 MODETC=$MODPATH/system/etc
 MODVETC=$MODPATH/system/vendor/etc
 MODVOETC=$MODPATH/system/vendor/odm/etc
@@ -62,7 +67,7 @@ fi
 NAME="*audio*effects*.conf -o -name *audio*effects*.xml -o -name *policy*.conf -o -name *policy*.xml"
 rm -f `find $MODPATH/system -type f -name $NAME`
 A=`find $ETC -maxdepth 1 -type f -name $NAME`
-VA=`find $VETC -maxdepth 1 -type f -name $NAME`
+VA=`find $VETC /odm/etc /my_product/etc -maxdepth 1 -type f -name $NAME`
 VOA=`find $VOETC -maxdepth 1 -type f -name $NAME`
 VAA=`find $VETC/audio -maxdepth 1 -type f -name $NAME`
 VBA=`find $VETC/audio/"$PROP" -maxdepth 1 -type f -name $NAME`
@@ -89,10 +94,10 @@ if [ "$SKU" ]; then
     fi
   done
 fi
-rm -f `find $MODPATH/system -type f -name *policy*volumes*.xml`
+rm -f `find $MODPATH/system -type f -name *policy*volume*.xml -o -name *audio*effects*spatializer*.xml`
 
 # run
-sh $MODPATH/.aml.sh
+. $MODPATH/.aml.sh
 
 # directory
 DIR=/data/waves
@@ -104,7 +109,7 @@ fi
 # cleaning
 FILE=$MODPATH/cleaner.sh
 if [ -f $FILE ]; then
-  sh $FILE
+  . $FILE
   rm -f $FILE
 fi
 

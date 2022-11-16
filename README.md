@@ -1,15 +1,16 @@
-# Moto Waves V2 XT2125-4 Maxx Audio Magisk Module
+# Moto Waves V2 XT2125 Maxx Audio Magisk Module
 
 ## DISCLAIMER
 - Waves apps and blobs are owned by Waves™.
 - The MIT license specified here is for the Magisk Module, not for Waves apps and blobs.
 
 ## Descriptions
-- Equalizer soundfx ported from Motorola Moto XT2125-4 (nio) and integrated as a Magisk Module for all supported and rooted devices with Magisk
+- Equalizer soundfx ported from Motorola Moto XT2125 (nio) and integrated as a Magisk Module for all supported and rooted devices with Magisk
 - Global type soundfx
 
 ## Sources
 - https://dumps.tadiphone.dev/dumps/motorola/nio msi_prc-user-11-RRN31.Q3-1-11-1-919e2-release-keys
+- MotoWavesV2.apk: https://dumps.tadiphone.dev/dumps/motorola/nio user-12-S1RTS32.41-20-16-1-3-22842-release-keys
 - system_12: https://dumps.tadiphone.dev/dumps/motorola/xpeng user-12-S1RX32.50-13-ffb1b-release-keys
 - system_pstar: https://dumps.tadiphone.dev/dumps/motorola/pstar msi-user-11-RRAS31.Q3-19-86-4-01582-release-keys
 - system_nairo: https://dumps.tadiphone.dev/dumps/motorola/nairo msi-user-11-RPN31.Q4U-39-27-5-20ead-release-keys
@@ -38,10 +39,13 @@
 
 ## Support & Bug Report
 - https://t.me/androidryukimodsdiscussions/2618
+- If you don't do above, issues will be closed immediately
 
 ## Tested on
 - Android 12 AncientOS ROM
-  - Bug: Doesn't work with bluetooth audio
+
+## Known Issue
+- Doesn't work with bluetooth audio in Android 12
 
 ## Credits and contributors
 - https://t.me/viperatmos
