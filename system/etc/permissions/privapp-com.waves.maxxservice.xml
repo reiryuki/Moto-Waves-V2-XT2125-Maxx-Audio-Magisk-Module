@@ -5,4 +5,3 @@
         <permission name="android.permission.INTERACT_ACROSS_USERS"/>
     </privapp-permissions>
 </permissions>
-
