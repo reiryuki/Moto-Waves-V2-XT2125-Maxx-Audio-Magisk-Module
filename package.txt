@@ -1,0 +1,2 @@
+com.motorola.motowaves
+com.waves.maxxservice

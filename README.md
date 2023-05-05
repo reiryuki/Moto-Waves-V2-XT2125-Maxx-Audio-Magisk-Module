@@ -1,8 +1,8 @@
 # Moto Waves V2 XT2125 Maxx Audio Magisk Module
 
 ## DISCLAIMER
-- Waves apps and blobs are owned by Waves™.
-- The MIT license specified here is for the Magisk Module, not for Waves apps and blobs.
+- Motorola and Waves apps and blobs are owned by Motorola™ and Waves™.
+- The MIT license specified here is for the Magisk Module, not for Motorola and Waves apps and blobs.
 
 ## Descriptions
 - Equalizer soundfx ported from Motorola Moto XT2125 (nio) and integrated as a Magisk Module for all supported and rooted devices with Magisk
@@ -23,8 +23,10 @@
 - Architecture arm64 or arm
 - Android 11 (SDK 30) or Android 12 (SDK 31) only (Not all device is supported)
 - Magisk Installed
+- Moto Core Magisk Module installed https://github.com/reiryuki/Moto-Core-Magisk-Module except you are in Motorola ROM
 
 ## Installation Guide & Download Link
+- Install Moto Core Magisk Module first: https://github.com/reiryuki/Moto-Core-Magisk-Module except you are in Motorola ROM
 - Install this module https://www.pling.com/p/1531780/ via Magisk app or Recovery
 - Install AML Magisk Module https://t.me/androidryukimodsdiscussions/29836 only if using any other audio mod module
 - Reboot
