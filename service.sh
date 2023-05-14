@@ -42,34 +42,28 @@ if [ -d $DIR ] && [ ! -f $AML/disable ]; then
 fi
 
 # magisk
-if [ -d /sbin/.magisk ]; then
-  MAGISKTMP=/sbin/.magisk
-else
-  MAGISKTMP=`realpath /dev/*/.magisk`
+MAGISKPATH=`magisk --path`
+if [ "$MAGISKPATH" ]; then
+  MAGISKTMP=$MAGISKPATH/.magisk
+  MIRROR=$MAGISKTMP/mirror
+  ODM=$MIRROR/odm
+  MY_PRODUCT=$MIRROR/my_product
 fi
-
-# path
-MIRROR=$MAGISKTMP/mirror
-SYSTEM=`realpath $MIRROR/system`
-VENDOR=`realpath $MIRROR/vendor`
-ODM=`realpath $MIRROR/odm`
-MY_PRODUCT=`realpath $MIRROR/my_product`
 
 # mount
 NAME="*audio*effects*.conf -o -name *audio*effects*.xml -o -name *policy*.conf -o -name *policy*.xml"
 if [ -d $AML ] && [ ! -f $AML/disable ]\
 && find $AML/system/vendor -type f -name $NAME; then
-  NAME="*audio*effects*.conf -o -name *audio*effects*.xml"
-#p  NAME="*audio*effects*.conf -o -name *audio*effects*.xml -o -name *policy*.conf -o -name *policy*.xml"
   DIR=$AML/system/vendor
 else
   DIR=$MODPATH/system/vendor
 fi
 FILES=`find $DIR/etc -maxdepth 1 -type f -name $NAME`
-if [ ! -d $ODM ] && [ "`realpath /odm/etc`" == /odm/etc ]\
+if [ ! -d $ODM ] && [ -d /odm/etc ]\
+&& [ "`realpath /odm/etc`" == /odm/etc ]\
 && [ "$FILES" ]; then
   for FILE in $FILES; do
-    DES="/odm$(echo $FILE | sed "s|$DIR||")"
+    DES="/odm`echo $FILE | sed "s|$DIR||"`"
     if [ -f $DES ]; then
       umount $DES
       mount -o bind $FILE $DES
@@ -79,7 +73,7 @@ fi
 if [ ! -d $MY_PRODUCT ] && [ -d /my_product/etc ]\
 && [ "$FILES" ]; then
   for FILE in $FILES; do
-    DES="/my_product$(echo $FILE | sed "s|$DIR||")"
+    DES="/my_product`echo $FILE | sed "s|$DIR||"`"
     if [ -f $DES ]; then
       umount $DES
       mount -o bind $FILE $DES

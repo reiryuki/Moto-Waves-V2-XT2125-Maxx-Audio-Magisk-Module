@@ -23,23 +23,20 @@ chcon -R u:object_r:vendor_configs_file:s0 $MODPATH/system/odm/etc
 chcon u:object_r:same_process_hal_file:s0 $MODPATH/system/vendor/lib*/libadspd.so
 
 # magisk
-if [ -d /sbin/.magisk ]; then
-  MAGISKTMP=/sbin/.magisk
-else
-  MAGISKTMP=`realpath /dev/*/.magisk`
+MAGISKPATH=`magisk --path`
+if [ "$MAGISKPATH" ]; then
+  MAGISKTMP=$MAGISKPATH/.magisk
+  MIRROR=$MAGISKTMP/mirror
+  ODM=$MIRROR/odm
+  MY_PRODUCT=$MIRROR/my_product
 fi
 
 # path
-MIRROR=$MAGISKTMP/mirror
-SYSTEM=`realpath $MIRROR/system`
-VENDOR=`realpath $MIRROR/vendor`
-ODM=`realpath $MIRROR/odm`
-MY_PRODUCT=`realpath $MIRROR/my_product`
-ETC=$SYSTEM/etc
-VETC=$VENDOR/etc
-VOETC=$VENDOR/odm/etc
-OETC=$ODM/etc
-MPETC=$MY_PRODUCT/etc
+ETC=`realpath /system/etc`
+VETC=`realpath /vendor/etc`
+VOETC=`realpath /vendor/odm/etc`
+OETC=`realpath /odm/etc`
+MPETC=`realpath /my_product/etc`
 MODETC=$MODPATH/system/etc
 MODVETC=$MODPATH/system/vendor/etc
 MODVOETC=$MODPATH/system/vendor/odm/etc
@@ -108,18 +105,13 @@ fi
 if [ "$MPA" ]; then
   cp -f $MPA $MODMPETC
 fi
-if [ ! -d $ODM ]\
-&& [ "`realpath /odm/etc`" == /odm/etc ]; then
-  OA=`find /odm/etc -maxdepth 1 -type f -name $NAME`
-  if [ "$OA" ]; then
-    cp -f $OA $MODVETC
-  fi
+if [ ! -d $ODM ] && [ -d /odm/etc ]\
+&& [ "$OETC" == /odm/etc ] && [ "$OA" ]; then
+  cp -f $OA $MODVETC
 fi
-if [ ! -d $MY_PRODUCT ] && [ -d /my_product/etc ]; then
-  MPA=`find /my_product/etc -maxdepth 1 -type f -name $NAME`
-  if [ "$MPA" ]; then
-    cp -f $MPA $MODVETC
-  fi
+if [ ! -d $MY_PRODUCT ] && [ -d /my_product/etc ]\
+&& [ "$MPA" ]; then
+  cp -f $MPA $MODVETC
 fi
 rm -f `find $MODPATH/system -type f -name *policy*volume*.xml -o -name *audio*effects*spatializer*.xml`
 

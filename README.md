@@ -22,12 +22,12 @@
 ## Requirements
 - Architecture arm64 or arm
 - Android 11 (SDK 30) or Android 12 (SDK 31) only (Not all device is supported)
-- Magisk Installed
+- Magisk or KernelSU installed
 - Moto Core Magisk Module installed https://github.com/reiryuki/Moto-Core-Magisk-Module except you are in Motorola ROM
 
 ## Installation Guide & Download Link
 - Install Moto Core Magisk Module first: https://github.com/reiryuki/Moto-Core-Magisk-Module except you are in Motorola ROM
-- Install this module https://www.pling.com/p/1531780/ via Magisk app or Recovery
+- Install this module https://www.pling.com/p/1531780/ via Magisk app or KernelSU app or Recovery (unless you are using KernelSU)
 - Install AML Magisk Module https://t.me/androidryukimodsdiscussions/29836 only if using any other audio mod module
 - Reboot
 - Open Moto Audio app via quick settings and tap 'Show icon in the app tray' to show Moto Audio app icon launcher
