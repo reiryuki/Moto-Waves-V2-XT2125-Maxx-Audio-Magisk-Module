@@ -1,11 +1,11 @@
-# Moto Waves V2 XT2125 Maxx Audio Magisk Module
+# Moto Waves V2 XT2125 Magisk Module
 
 ## DISCLAIMER
 - Motorola and Waves apps and blobs are owned by Motorola™ and Waves™.
-- The MIT license specified here is for the Magisk Module, not for Motorola and Waves apps and blobs.
+- The MIT license specified here is for the Magisk Module only, not for Motorola and Waves apps and blobs.
 
 ## Descriptions
-- Equalizer soundfx ported from Motorola Moto XT2125 (nio) and integrated as a Magisk Module for all supported and rooted devices with Magisk
+- Equalizer soundfx ported from Motorola XT2125 (nio) and integrated as a Magisk Module for all supported and rooted devices with Magisk
 - Global type soundfx
 
 ## Sources
@@ -24,12 +24,15 @@
 - Android 11 (SDK 30) or Android 12 (SDK 31) only (Not all device is supported)
 - Magisk or KernelSU installed
 - Moto Core Magisk Module installed https://github.com/reiryuki/Moto-Core-Magisk-Module except you are in Motorola ROM
+- Bluetooth A2DP offload ROM support for Bluetooth audio
 
 ## Installation Guide & Download Link
 - Install Moto Core Magisk Module first: https://github.com/reiryuki/Moto-Core-Magisk-Module except you are in Motorola ROM
-- Install this module https://www.pling.com/p/1531780/ via Magisk app or KernelSU app or Recovery (unless you are using KernelSU)
+- Install this module https://www.pling.com/p/1531780/ via Magisk app or KernelSU app or Recovery if Magisk installed
 - Install AML Magisk Module https://t.me/androidryukimodsdiscussions/29836 only if using any other audio mod module
 - Reboot
+- If you are using KernelSU, you need to allow superuser list manually all package name listed in package.txt (and your home launcher app also) (enable show system apps) and reboot after
+- If you are using SUList, you need to allow list manually your home launcher app (enable show system apps) and reboot after
 - Open Moto Audio app via quick settings and tap 'Show icon in the app tray' to show Moto Audio app icon launcher
 - Tap 'About' then tap multiple times the image if you want to disable FX for loudspeaker
 
@@ -47,7 +50,7 @@
 - Android 12 AncientOS ROM
 
 ## Known Issue
-- Doesn't work with bluetooth audio in Android 12
+- Doesn't work with Bluetooth audio in ROM that doesn't support A2DP offload
 
 ## Credits and contributors
 - https://t.me/viperatmos
@@ -55,7 +58,7 @@
 - You can contribute ideas about this Magisk Module here: https://t.me/androidappsportdevelopment
 
 ## Thanks for Donations
-- This Magisk Module is always will be free but you can however show us that you are care by making a donations:
+This Magisk Module is always will be free but you can however show us that you are care by making a donations:
 - https://ko-fi.com/reiryuki
 - https://www.paypal.me/reiryuki
 - https://t.me/androidryukimodsdiscussions/2619
