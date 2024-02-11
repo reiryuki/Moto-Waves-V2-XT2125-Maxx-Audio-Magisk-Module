@@ -46,25 +46,20 @@ FILE=$MODPATH/sepolicy.pfsd
 sepolicy_sh
 
 # list
-(
 PKGS=`cat $MODPATH/package.txt`
 for PKG in $PKGS; do
-  magisk --denylist rm $PKG
-  magisk --sulist add $PKG
+  magisk --denylist rm $PKG 2>/dev/null
+  magisk --sulist add $PKG 2>/dev/null
 done
-FILE=$MODPATH/tmp_file
-magisk --hide sulist 2>$FILE
-if [ "`cat $FILE`" == 'SuList is enforced' ]; then
+if magisk magiskhide sulist; then
   for PKG in $PKGS; do
-    magisk --hide add $PKG
+    magisk magiskhide add $PKG
   done
 else
   for PKG in $PKGS; do
-    magisk --hide rm $PKG
+    magisk magiskhide rm $PKG
   done
 fi
-rm -f $FILE
-) 2>/dev/null
 
 # conflict
 MOD=/data/adb/modules
@@ -80,10 +75,8 @@ fi
 
 # directory
 DIR=/data/waves
-if [ ! -d $DIR ]; then
-  mkdir -p $DIR
-  chown 1013.1013 $DIR
-fi
+mkdir -p $DIR
+chown 1013.1013 $DIR
 
 # permission
 DIRS=`find $MODPATH/vendor\
@@ -130,15 +123,41 @@ fi
 }
 
 # mount
-if ! grep delta /data/adb/magisk/util_functions.sh; then
+if ! grep -E 'delta|Delta|kitsune' /data/adb/magisk/util_functions.sh; then
   mount_helper
 fi
+
+# function
+mount_bind_file() {
+for FILE in $FILES; do
+  umount $FILE
+  mount -o bind $MODFILE $FILE
+done
+}
+mount_bind_to_apex() {
+for NAME in $NAMES; do
+  MODFILE=$MODPATH/system/lib64/$NAME
+  if [ -f $MODFILE ]; then
+    FILES=`find /apex /system/apex -path *lib64/* -type f -name $NAME`
+    mount_bind_file
+  fi
+  MODFILE=$MODPATH/system/lib/$NAME
+  if [ -f $MODFILE ]; then
+    FILES=`find /apex /system/apex -path *lib/* -type f -name $NAME`
+    mount_bind_file
+  fi
+done
+}
+
+# mount
+NAMES=libutils.so
+mount_bind_to_apex
 
 # cleaning
 FILE=$MODPATH/cleaner.sh
 if [ -f $FILE ]; then
   . $FILE
-  mv -f $FILE $FILE\.txt
+  mv -f $FILE $FILE.txt
 fi
 
 

@@ -9,12 +9,12 @@
 - Global type soundfx
 
 ## Sources
-- https://dumps.tadiphone.dev/dumps/motorola/nio msi_prc-user-11-RRN31.Q3-1-11-1-919e2-release-keys
-- MotoWavesV2.apk: https://dumps.tadiphone.dev/dumps/motorola/nio user-12-S1RTS32.41-20-16-1-3-22842-release-keys
-- system_12: https://dumps.tadiphone.dev/dumps/motorola/xpeng user-12-S1RX32.50-13-ffb1b-release-keys
+- https://dumps.tadiphone.dev/dumps/motorola/nio user-12-S1RTS32.41-20-16-1-5-d6673-release-keys
+- system_11: https://dumps.tadiphone.dev/dumps/motorola/nio msi_prc-user-11-RRN31.Q3-1-11-1-919e2-release-keys
 - system_pstar: https://dumps.tadiphone.dev/dumps/motorola/pstar msi-user-11-RRAS31.Q3-19-86-4-01582-release-keys
 - system_nairo: https://dumps.tadiphone.dev/dumps/motorola/nairo msi-user-11-RPN31.Q4U-39-27-5-20ead-release-keys
 - system_racer: https://dumps.tadiphone.dev/dumps/motorola/racer msi-user-11-RPD31.Q4U-39-26-4-3c874-release-keys
+- system_support: LineageOS ROM Android 14
 
 ## Screenshots
 - https://t.me/androidryukimodsdiscussions/2963
