@@ -5,8 +5,8 @@
 - The MIT license specified here is for the Magisk Module only, not for Motorola and Waves apps and blobs.
 
 ## Descriptions
-- Equalizer soundfx ported from Motorola XT2125 (nio) and integrated as a Magisk Module for all supported and rooted devices with Magisk
-- Global type soundfx
+- Equalizer sound effect ported from Motorola XT2125 (nio) and integrated as a Magisk Module for all supported and rooted devices with Magisk
+- Global type sound effect
 
 ## Sources
 - https://dumps.tadiphone.dev/dumps/motorola/nio user-12-S1RTS32.41-20-16-1-5-d6673-release-keys
@@ -15,13 +15,15 @@
 - system_nairo: https://dumps.tadiphone.dev/dumps/motorola/nairo msi-user-11-RPN31.Q4U-39-27-5-20ead-release-keys
 - system_racer: https://dumps.tadiphone.dev/dumps/motorola/racer msi-user-11-RPD31.Q4U-39-26-4-3c874-release-keys
 - system_support: LineageOS ROM Android 14
+- libmagiskpolicy.so: Kitsune Mask R6687BB53
 
 ## Screenshots
 - https://t.me/androidryukimodsdiscussions/2963
 
 ## Requirements
-- ARM architecture or ARM64 architecture with 32 bit library support
-- Android 11 (SDK 30) or Android 12 (SDK 31) only (Not all device is supported)
+- ARM or ARM64 architecture
+- 32 bit audio service (this also can be found in 64 bit ROM with 32 bit support, not only 32 bit ROM)
+- Android 11 (SDK 30) or Android 12 (SDK 31) only
 - Magisk or KernelSU installed
 - Moto Core Magisk Module installed https://github.com/reiryuki/Moto-Core-Magisk-Module except you are in Motorola ROM
 - Bluetooth A2DP offload ROM support for Bluetooth audio
@@ -29,12 +31,13 @@
 ## Installation Guide & Download Link
 - Install Moto Core Magisk Module first: https://github.com/reiryuki/Moto-Core-Magisk-Module except you are in Motorola ROM
 - Install this module https://www.pling.com/p/1531780/ via Magisk app or KernelSU app or Recovery if Magisk installed
-- Install AML Magisk Module https://t.me/androidryukimodsdiscussions/29836 only if using any other audio mod module
+- Install AML Magisk Module https://t.me/androidryukimodsdiscussions/29836 only if using any other else audio mod module
+- If you are using KernelSU, you need to disable Unmount Modules by Default in KernelSU app settings
 - Reboot
-- If you are using KernelSU, you need to allow superuser list manually all package name listed in package.txt (and your home launcher app also) (enable show system apps) and reboot after
-- If you are using SUList, you need to allow list manually your home launcher app (enable show system apps) and reboot after
+- If you are using KernelSU, you need to allow superuser list manually all package name listed in package.txt (and your home launcher app also) (enable show system apps) and reboot afterwards
+- If you are using SUList, you need to allow list manually your home launcher app (enable show system apps) and reboot afterwards
 - Open Moto Audio app via quick settings and tap 'Show icon in the app tray' to show Moto Audio app icon launcher
-- Tap 'About' then tap multiple times the image if you want to disable FX for loudspeaker
+- Tap 'About' then tap multiple times the image if you want to disable effect for loudspeaker
 
 ## Optionals & Troubleshootings
 - https://t.me/androidryukimodsdiscussions/3081
@@ -52,15 +55,12 @@
 ## Known Issue
 - Doesn't work with Bluetooth audio in ROM that doesn't support A2DP offload
 
-## Credits and contributors
+## Credits and Contributors
 - https://t.me/viperatmos
 - https://t.me/androidryukimodsdiscussions
 - You can contribute ideas about this Magisk Module here: https://t.me/androidappsportdevelopment
 
-## Thanks for Donations
-This Magisk Module is always will be free but you can however show us that you are care by making a donations:
-- https://ko-fi.com/reiryuki
-- https://www.paypal.me/reiryuki
+## Sponsors
 - https://t.me/androidryukimodsdiscussions/2619
 
 

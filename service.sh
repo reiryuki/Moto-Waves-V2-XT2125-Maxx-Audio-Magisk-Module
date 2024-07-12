@@ -84,6 +84,22 @@ until [ "`getprop sys.boot_completed`" == 1 ]; do
   sleep 10
 done
 
+# list
+PKGS=`cat $MODPATH/package.txt`
+for PKG in $PKGS; do
+  magisk --denylist rm $PKG 2>/dev/null
+  magisk --sulist add $PKG 2>/dev/null
+done
+if magisk magiskhide sulist; then
+  for PKG in $PKGS; do
+    magisk magiskhide add $PKG
+  done
+else
+  for PKG in $PKGS; do
+    magisk magiskhide rm $PKG
+  done
+fi
+
 # function
 grant_permission() {
 if [ "$API" -ge 31 ]; then
@@ -103,6 +119,7 @@ fi
 PKG=com.motorola.motowaves
 if [ "$API" -ge 33 ]; then
   pm grant $PKG android.permission.POST_NOTIFICATIONS
+  appops set $PKG ACCESS_RESTRICTED_SETTINGS allow
 fi
 appops set $PKG SYSTEM_ALERT_WINDOW allow
 grant_permission
@@ -141,7 +158,7 @@ check_audioserver
 }
 
 # check
-PROC="com.waves.maxxservice com.motorola.motowaves"
+PROC=com.waves.maxxservice
 killall $PROC
 check_audioserver
 
