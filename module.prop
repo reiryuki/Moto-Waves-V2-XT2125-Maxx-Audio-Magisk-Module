@@ -1,8 +1,8 @@
 id=MotoWaves
 name=Moto Waves V2 XT2125
-version=v4.11
-versionCode=41
+version=v4.12
+versionCode=42
 author=Rei Ryuki the Fixer
-description=An equalizer global type sound effect ported from Motorola XT2125 (nio) for any Android 11 and 12 only, ARM & ARM64 architecture.
+description=Equalizer global type sound effect ported from Motorola XT2125 (nio) for any armeabi-v7a or arm64-v8a architecture, Android 11 (SDK 30) and 12 (SDK 31) only.
 
 

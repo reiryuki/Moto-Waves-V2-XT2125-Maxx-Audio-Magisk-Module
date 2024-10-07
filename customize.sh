@@ -3,9 +3,17 @@ ui_print " "
 
 # var
 UID=`id -u`
-LIST32BIT=`grep_get_prop ro.product.cpu.abilist32`
-if [ ! "$LIST32BIT" ]; then
-  LIST32BIT=`grep_get_prop ro.system.product.cpu.abilist32`
+[ ! "$UID" ] && UID=0
+ABILIST=`grep_get_prop ro.product.cpu.abilist`
+if [ ! "$ABILIST" ]; then
+  ABILIST=`grep_get_prop ro.system.product.cpu.abilist`
+fi
+ABILIST32=`grep_get_prop ro.product.cpu.abilist32`
+if [ ! "$ABILIST32" ]; then
+  ABILIST32=`grep_get_prop ro.system.product.cpu.abilist32`
+fi
+if [ ! "$ABILIST32" ]; then
+  [ -f /system/lib/libandroid.so ] && ABILIST32=true
 fi
 
 # log
@@ -57,12 +65,44 @@ fi
 ui_print " "
 
 # architecture
-if [ "$ARCH" == arm64 ] || [ "$ARCH" == arm ]; then
-  ui_print "- $ARCH architecture"
+if [ "$ABILIST" ]; then
+  ui_print "- $ABILIST architecture"
   ui_print " "
-else
-  ui_print "! Unsupported $ARCH architecture."
-  ui_print "  This module is only for arm64 or arm architecture."
+fi
+NAME=arm64-v8a
+NAME2=armeabi-v7a
+if ! echo "$ABILIST" | grep -Eq "$NAME|$NAME2"; then
+  if [ "$BOOTMODE" == true ]; then
+    ui_print "! This ROM doesn't support $NAME"
+    ui_print "  nor $NAME2 architecture"
+  else
+    ui_print "! This Recovery doesn't support $NAME"
+    ui_print "  nor $NAME2 architecture"
+    ui_print "  Try to install via Magisk app instead"
+  fi
+  abort
+fi
+if ! echo "$ABILIST" | grep -q $NAME; then
+  rm -rf `find $MODPATH -type d -name *64*`\
+   $MODPATH/system*/bin
+  if [ "$BOOTMODE" != true ]; then
+    ui_print "! This Recovery doesn't support $NAME architecture"
+    ui_print "  Try to install via Magisk app instead"
+    ui_print " "
+  fi
+fi
+if ! echo "$ABILIST" | grep -q $NAME2; then
+  if [ "$BOOTMODE" == true ]; then
+    abort "! This ROM doesn't support $NAME2 architecture"
+  else
+    ui_print "! This Recovery doesn't support $NAME2 architecture"
+    ui_print "  Try to install via Magisk app instead"
+    abort
+  fi
+fi
+if ! file /*/bin/hw/*hardware*audio* | grep -q 32-bit; then
+  ui_print "! This module uses 32 bit audio service only"
+  ui_print "  But this ROM uses 64 bit audio service"
   abort
 fi
 
@@ -86,36 +126,12 @@ else
   fi
 fi
 ui_print " "
-rm -rf $MODPATH/system_11
 
 # recovery
 mount_partitions_in_recovery
 
-# bit
-AUDIO64BIT=`grep linker64 /*/bin/hw/*hardware*audio*`
-if [ "$LIST32BIT" ]; then
-  if [ "$IS64BIT" == true ]; then
-#    ui_print "- 64 bit architecture"
-#    ui_print " "
-    ui_print "- 32 bit library support"
-    ui_print " "
-  else
-#    ui_print "- 32 bit architecture"
-    rm -rf `find $MODPATH -type d -name *64*`
-#    ui_print " "
-  fi
-  if [ "$AUDIO64BIT" ]; then
-    ui_print "! This module uses 32 bit audio service only"
-    ui_print "  But this ROM uses 64 bit audio service"
-    abort
-  fi
-else
-  abort "! This ROM doesn't support 32 bit library"
-fi
-
 # motocore
-if [ ! -d /data/adb/modules_update/MotoCore ]\
-&& [ ! -d /data/adb/modules/MotoCore ]; then
+if [ ! -d /data/adb/modules/MotoCore ]; then
   ui_print "- This module requires Moto Core Magisk Module installed"
   ui_print "  except you are in Motorola ROM."
   ui_print "  Please read the installation guide!"
@@ -185,6 +201,13 @@ done
 
 # extract
 APPS=MotoWavesV2
+if [ "$IS64BIT" == true ]; then
+  ABI=arm64-v8a
+  ARCH=arm64
+else
+  ABI=armeabi-v7a
+  ARCH=arm
+fi
 extract_lib
 
 # extract
@@ -203,7 +226,7 @@ if [ -f $MODPATH/system_support$DIR/$LIB ]; then
   ui_print "  Please wait..."
   if ! grep -q $NAME $FILE; then
     ui_print "  Function not found."
-    ui_print "  Replaces /system$DIR/$LIB."
+    ui_print "  Replaces /system$DIR/$LIB systemlessly."
     mv -f $MODPATH/system_support$DIR/$LIB $MODPATH/system$DIR
     [ "$MES" ] && ui_print "$MES"
   fi
@@ -255,6 +278,7 @@ if [ "$BOOTMODE" == true ]; then
     fi
   done
 fi
+rm -rf $MODPATH/system_11
 remove_sepolicy_rule
 ui_print " "
 
@@ -309,7 +333,7 @@ if [ "`grep_prop data.cleanup $OPTIONALS`" == 1 ]; then
   ui_print " "
 elif [ -d $DIR ]\
 && [ "$PREVMODNAME" != "$MODNAME" ]; then
-  ui_print "- Different version detected"
+  ui_print "- Different module name is detected"
   ui_print "  Cleaning-up $MODID data..."
   cleanup
   ui_print " "
@@ -363,7 +387,7 @@ for APP in $APPS; do
 done
 }
 replace_dir() {
-if [ -d $DIR ]; then
+if [ -d $DIR ] && [ ! -d $MODPATH$MODDIR ]; then
   REPLACE="$REPLACE $MODDIR"
 fi
 }
@@ -406,9 +430,10 @@ done
 }
 
 # hide
-APPS="`ls $MODPATH/system/priv-app` `ls $MODPATH/system/app`"
+APPS="`ls $MODPATH/system/priv-app`
+      `ls $MODPATH/system/app`"
 hide_oat
-APPS="MusicFX MotoWaves WavesService"
+APPS="$APPS MusicFX MotoWaves WavesService"
 hide_app
 
 # stream mode
@@ -518,13 +543,15 @@ fi
 # function
 file_check_vendor() {
 for FILE in $FILES; do
-  DES=$VENDOR$FILE
-  DES2=$ODM$FILE
-  if [ -f $DES ] || [ -f $DES2 ]; then
-    ui_print "- Detected $FILE"
-    ui_print " "
-    rm -f $MODPATH/system/vendor$FILE
-  fi
+  DESS="$VENDOR$FILE $ODM$FILE"
+  for DES in $DESS; do
+    if [ -f $DES ]; then
+      ui_print "- Detected"
+      ui_print "$DES"
+      rm -f $MODPATH/system/vendor$FILE
+      ui_print " "
+    fi
+  done
 done
 }
 
@@ -545,7 +572,7 @@ fi
 # raw
 FILE=$MODPATH/.aml.sh
 if [ "`grep_prop disable.raw $OPTIONALS`" == 0 ]; then
-  ui_print "- Does not disable Ultra Low Latency playback (RAW)"
+  ui_print "- Does not disable Ultra Low Latency (Raw) playback"
   ui_print " "
 else
   sed -i 's|#u||g' $FILE
