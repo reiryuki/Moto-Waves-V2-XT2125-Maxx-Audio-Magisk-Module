@@ -195,8 +195,8 @@ else
   rm -f /data/adb/modules/MotoCore/disable
 fi
 
-# magisk
-magisk_setup
+# mirror
+mirror_setup
 
 # path
 SYSTEM=`realpath $MIRROR/system`
@@ -205,6 +205,7 @@ PRODUCT=`realpath $MIRROR/product`
 SYSTEM_EXT=`realpath $MIRROR/system_ext`
 ODM=`realpath $MIRROR/odm`
 MY_PRODUCT=`realpath $MIRROR/my_product`
+APEX=`realpath $MIRROR/apex`
 
 # sepolicy
 FILE=$MODPATH/sepolicy.rule
@@ -279,6 +280,14 @@ rm -f `find $MODPATH/system -type f -name extract`
 
 # function
 check_function() {
+FILE=`for LIST in $LISTS; do
+        APEX_FILE=$(find $APEX/*$DIR -maxdepth 1 -name $LIST)
+        if [ "$APEX_FILE" ]; then
+          echo $APEX/*$DIR/$LIST
+        else
+          echo $SYSTEM$DIR/$LIST
+        fi
+      done`
 if [ -f $MODPATH/system_support$DIR/$LIB ]; then
   ui_print "- Checking"
   ui_print "$NAME"
@@ -305,8 +314,7 @@ else
   DES=libandroidaudioeffect_Android11Plus.so
 fi
 FILE=`find $MODPATH/system -type f -name $DES`
-LISTS=`strings $FILE | grep ^lib | grep .so | sed -e "s|$DES||g" -e 's|libc++_shared.so||g'`
-FILE=`for LIST in $LISTS; do echo $SYSTEM$DIR/$LIST; done`
+LISTS=`strings $FILE | grep ^lib | grep \.so$ | sed -e "s|$DES||g" -e 's|libc++_shared.so||g'`
 check_function
 rm -rf `find $MODPATH/system -type d -name WavesServiceV2`/lib\
  $MODPATH/system_support

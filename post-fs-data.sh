@@ -157,6 +157,7 @@ chcon -R u:object_r:vendor_configs_file:s0 $MODPATH/system/odm/etc
 chcon -R u:object_r:vendor_file:s0 $MODPATH$MODSYSTEM/vendor
 chcon -R u:object_r:vendor_configs_file:s0 $MODPATH$MODSYSTEM/vendor/etc
 chcon -R u:object_r:vendor_configs_file:s0 $MODPATH$MODSYSTEM/vendor/odm/etc
+chcon u:object_r:same_process_hal_file:s0 $MODPATH$MODSYSTEM/vendor/lib*/libutils.so
 
 # function
 check_library() {
