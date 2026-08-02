@@ -94,13 +94,16 @@ https://t.me/androidryukimodsdiscussions/2963
 - If you are using KernelSU, you need to disable Unmount Modules by Default in KernelSU app settings and install https://github.com/KernelSU-Modules-Repo/meta-overlayfs or https://github.com/KernelSU-Modules-Repo/magic_mount_rs or https://github.com/KernelSU-Modules-Repo/hybrid_mount or https://github.com/maxsteeel/nomount first depending on ROM compatibility
 - Remove any other else Moto Waves MAGISK MODULE with different name and reboot first (No need to remove if it's the same name)
 - Install Moto Core Magisk Module first: https://github.com/reiryuki/Moto-Core-Magisk-Module except you are in Motorola ROM
-- Install this module https://devuploads.com/sww0zjtcarxu via Magisk app or Kitsune Mask app or KernelSU app or Apatch app or Recovery if Magisk or Kitsune Mask installed
+- Install this module https://bicolink.com/rXm0 via Magisk app or Kitsune Mask app or KernelSU app or Apatch app or Recovery if Magisk or Kitsune Mask installed
 - Install AML Magisk Module https://t.me/ryukinotes/34 only if using any other else audio mod module
 - Reboot
 - If you are using KernelSU, you need to allow superuser list manually all package name listed in package.txt (and your home launcher app also) (enable show system apps) and reboot afterwards
 - If you are using SUList, you need to allow list manually your home launcher app (enable show system apps) and reboot afterwards
 - Open Moto Audio app via quick settings and tap 'Show icon in the app tray' to show Moto Audio app icon launcher
 - Tap 'About' then tap multiple times the image if you want to disable effect for loudspeaker
+
+## Download Tutorial
+https://t.me/ryukinotes/97
 
 ## Optionals
 - https://t.me/ryukinotes/59
